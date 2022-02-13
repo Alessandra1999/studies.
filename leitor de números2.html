@@ -1,0 +1,33 @@
+<script>
+	
+let a = "";
+let b = "";
+
+while (true) {
+	if ((a != "0") && (b != "0")) {
+		a = prompt("entre com o primeiro número");
+		b = prompt("entre com o segundo número");
+		alert("Os números foram " + a + " " + "e " + b);
+		continue;
+	}
+	else if ((a != "0") && (b == "0")) {
+		a = prompt("entre com o primeiro número");
+		b = prompt("entre com o segundo número");
+		alert("Os números foram " + a + " " + "e " + b);
+		continue;
+	}
+	else if ((a == "0") && (b != "0")) {
+		a = prompt("entre com o primeiro número");
+		b = prompt("entre com o segundo número");
+		alert("Os números foram " + a + " " + "e " + b);
+		continue;
+	}
+	else if ((a == "0") && (b == "0")) {
+		break;
+	}
+	alert("Os números foram " + a + " " + "e " + b);
+}
+
+
+
+</script>
