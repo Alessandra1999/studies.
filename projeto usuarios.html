@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head><title>PROJETO</title></head>
+<script>
+	function envia () {
+		let mensagem = document.getElementById("mensagem").value;
+		
+		let idUsuarios = document.getElementById("idUsuarios").value;
+
+		document.getElementById("saida").innerHTML += "<br><br>" + mensagem + "<br> por <span style='color:" + aUsuarios[idUsuarios].cor + "'>@" + aUsuarios[idUsuarios].nome + "</span><br>";
+	}
+
+	aUsuarios = [];
+	totalUsuarios = 0;
+
+	function criarUsuario() {
+		let usuario = document.getElementById("usuario").value;
+		
+		let cor = document.getElementById("cor1").value;
+		document.getElementById("lista").innerHTML += "<span style='color: " + cor +"'>" + usuario + "</span><br>";
+
+		document.getElementById("idUsuarios").innerHTML += "<option value='" + totalUsuarios + "'>" + usuario + "</option>";
+
+		let u = {nome:usuario, cor:cor};
+		aUsuarios[totalUsuarios++] = u;
+	}
+</script>
+
+</head>
+<body>
+
+	@
+	<select id="idUsuarios">
+	</select>
+
+	<br>
+	Mensagem
+	<textarea id="mensagem"></textarea>
+
+	<br>
+	<button onclick="envia()">Enviar</button>
+
+	<BR><BR><BR>
+	@
+	<input id= "usuario" name= "nomeUsuario">
+
+	<BR>
+	Cor das mensagens
+	<input type="color" id="cor1">
+
+	<br>
+	<button onclick="criarUsuario()">Criar Usuário</button>
+
+	<br><br>
+	<b>Usuários Ativos:</b>
+	<br>
+	<p id="lista" style="color:cor1"></p>
+
+	<BR><BR><BR>Mensagens:
+	<p id="saida"></p>
+
+</body>
+</html>
