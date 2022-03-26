@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<script>
+	//Desafio.
+	//1 Ter um botão, no lado direito, de EDITAR
+	//2. Quando clicar no botão EDITAR, o lado direito passa a mostrar os dados dentro de campos de formulário e o botão EDITAR vira CONFIRMAR EDIÇÃO
+	//3. Quando clicar CONFIRMAR EDIÇÃO, atualiza o cadastro e volta a mostrar como consulta.
+
+	let aUsuarios = [];
+	let indiceSelecionado;
+	let modoEdicao = false;
+
+	function exibir(indice) {
+		indiceSelecionado = indice;
+		document.getElementById("idNome").innerHTML = aUsuarios[indice].nome;
+		document.getElementById("idEmail").innerHTML = aUsuarios[indice].email;
+		document.getElementById("idEndereço").innerHTML = aUsuarios[indice].endereço;
+		document.getElementById("idTelefone").innerHTML = aUsuarios[indice].telefone;
+		modoEdicao = false;
+		document.getElementById("idEditar").innerHTML = "Editar";
+	}
+
+	function apagar() {
+		document.getElementById("idNome").innerHTML = "";
+		document.getElementById("idEmail").innerHTML = "";
+		document.getElementById("idEndereço").innerHTML = "";
+		document.getElementById("idTelefone").innerHTML = "";
+	}
+
+	function remover(indice) {
+		aUsuarios.splice(indice,1);
+
+		if(indice == indiceSelecionado) {
+			apagar();
+		}
+		redesenha();
+	}
+
+	function redesenha() {
+		lista = "";
+
+		for(let i = 0; i < aUsuarios.length; i++) {
+			lista += "<button onclick='remover("+ i +")'>-</button> <span onclick='exibir("+ i +")'>" + aUsuarios[i].nome + "</span><BR>";
+		}
+		document.getElementById("lista").innerHTML = lista;
+	}
+	function criarCadastro() {
+		let nome = document.getElementById("nome").value;
+		let email = document.getElementById("email").value;
+		let endereço = document.getElementById("endereço").value;
+		let telefone = document.getElementById("telefone").value;
+
+		let u = {nome:nome, email:email, endereço:endereço, telefone:telefone};
+		
+		
+		aUsuarios.push(u);
+		redesenha();
+
+	}
+
+	function editar() {
+		if(!modoEdicao) {
+			document.getElementById("idNome").innerHTML = "<input id='inputNome' value = '" + aUsuarios[indiceSelecionado].nome + "'>";
+			document.getElementById("idEmail").innerHTML = "<input id='inputEmail' value = '" + aUsuarios[indiceSelecionado].email + "'>";
+			document.getElementById("idEndereço").innerHTML = "<input id='inputEndereço' value = '" + aUsuarios[indiceSelecionado].endereço + "'>";
+			document.getElementById("idTelefone").innerHTML = "<input id='inputTelefone' value = '" + aUsuarios[indiceSelecionado].telefone + "'>";
+			document.getElementById("idEditar").innerHTML = "Confirmar Edição";
+			modoEdicao = true;
+		} else {
+			aUsuarios[indiceSelecionado].nome = document.getElementById("inputNome").value;
+			aUsuarios[indiceSelecionado].email = document.getElementById("inputEmail").value;
+			aUsuarios[indiceSelecionado].endereço = document.getElementById("inputEndereço").value;
+			aUsuarios[indiceSelecionado].telefone = document.getElementById("inputTelefone").value;
+			document.getElementById("idEditar").innerHTML = "Editar";
+			exibir(indiceSelecionado);
+			redesenha();
+
+		}
+	}
+</script>
+
+<body>
+	<div style="width: 50%;float:left">
+		<br>Nome: <input id="nome">
+		<br><br>E-mail: <input id="email">
+		<br><br>Endereço: <input id="endereço">
+		<br><br>Telefone: <input id="telefone">
+
+		<br><br>
+		<button onclick="criarCadastro()">Criar Cadastro</button>
+
+		<br><br>
+		<b>Usuários:</b>
+		<br>
+		<p id="lista"></p>
+
+	</div>
+
+
+	<div style="width: 50%;float:right;">
+		<b>Cadastro:</b>
+		<br><br>Nome: <span id="idNome"></span>
+		<br><br>E-mail: <span id="idEmail"></span>
+		<br><br>Endereço: <span id="idEndereço"></span>
+		<br><br>Telefone: <span id="idTelefone"></span>
+		<br><br><button id="idEditar" onclick="editar()">Editar</button>
+	</div>
+</body>
+
+</html>
