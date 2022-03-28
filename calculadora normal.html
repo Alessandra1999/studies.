@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	
+	<style>
+		td {
+			padding:  10px;
+		}
+	</style>
+
+	<script>
+
+		let modoAtualizar = false;
+
+		function operacao(event) {
+			let op = event.srcElement.innerHTML;
+
+			if (modoAtualizar) {
+				modoAtualizar = false;
+				if (parseInt(op) > 0) {
+					document.getElementById("resultado").innerHTML = op;
+					return;
+				}
+			}
+
+			if (op != "ENTER") {
+				document.getElementById("resultado").innerHTML += op;
+			} else {
+				document.getElementById("resultado").innerHTML = eval(document.getElementById("resultado").innerHTML);
+				modoAtualizar = true;
+			}
+		}
+	</script>
+
+	<table border=1 onclick='operacao(event)'>
+
+		<tr><td colspan=4 id="resultado"></td></tr>
+		
+		<tr><td></td><td>/</td><td>*</td><td>-</td></tr>
+
+		<tr><td>7</td><td>8</td><td>9</td><td>+</td></tr>
+
+		<tr><td>4</td><td>5</td><td>6</td><td rowspan="3">ENTER</td></tr>
+
+		<tr><td>1</td><td>2</td><td>3</td></tr>
+
+		<tr><td colspan="3">0</td></tr>
+
+	</table>
+</html>
